@@ -18,13 +18,19 @@ Data Sources:
 • https://www.kaggle.com/datasets/debashis74017/stock-market-data-nifty-100-stocks-5-min-data?select=BHARTIARTL_with_indicators_.csv
 • https://www.kaggle.com/datasets/setseries/nifty50-stocks-dataset20102021/data
 
+
+
 The pipeline can be broadly divided into 3 layers namely Landing Layer, Staging Layer, and Production Layer. We wanted to analyse the trends over the timeline of years, quarters and month.
 Before creating the pipeline, we analysed our dataset. We had 50 CSV individual files separately for each stock over 7 years, we used PYTHON to do the initial pre-processing steps, by merging the data into 3 files: Yearly, Quarterly, and Monthly.
+
+<img width="526" alt="image" src="https://github.com/ysreeja/DataNifty-/assets/163582984/79b7719f-31fa-465a-93a0-8eee927648d6">
+
 
 LANDING LAYER:
 Initially, we created S3 buckets.
 One for Source: source-stocks & One for Target: target-stocks.
 After creating S3 buckets, the CSV files were uploaded to specific folders within the source bucket. Following this, to perform ETL and query the transformed data for analysis, we created source and target AWS Glue Databases using Amazon Athena. Then the data was loaded into the respective database with the help of AWS Crawlers. Crawlers automatically detect the schema of the files and create tables to store data in the database.
+
 
 STAGING LAYER:
 In AWS Glue, we set up a target database where all our cleaned and transformed data lands after our ETL jobs finish their work. This database is like a safe home for our data, making sure it's organized and ready to use for future analyses and applications.Now we create ETL jobs in GLUE as follows. In the ETL jobs, we have performed transformations and schema changes as per our requirements.
